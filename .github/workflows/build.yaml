@@ -21,7 +21,7 @@ jobs:
       - name: Checkout xen-orchestra
         uses: actions/checkout@v7
         with:
-          repository: https://github.com/vatesfr/xen-orchestra.git
+          repository: vatesfr/xen-orchestra
           ref: ${{ env.XO_REF  }}
           path: src
 
