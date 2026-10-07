@@ -1,0 +1,48 @@
+name: Build for release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Get target version and git ref
+        run: |
+          cat target.txt
+          cat target.txt >> $GITHUB_ENV
+
+      - name: Checkout xen-orchestra
+        uses: actions/checkout@v7
+        with:
+          repository: https://github.com/vatesfr/xen-orchestra.git
+          ref: ${{ env.XO_REF  }}
+          path: src
+
+      - name: Run debian container
+        run: |
+          docker run -d --name builder -v ./:/workdir debian:13-slim tail -f /dev/null
+
+      - name: Install tools in container
+        run: |
+          docker exec builder sh -c 'apt update && apt install curl build-essential libfuse-dev'
+
+      - name: Setup Node.js
+          docker exec builder sh -c 'curl -fsSL https://deb.nodesource.com/setup_24.x | bash -'
+
+      - name: npm
+        run: |
+          docker exec builder sh -c 'cd /workdir/src && npm'
+
+      - name: npm build
+        run: |
+          docker exec builder sh -c 'cd /workdir/src && npm build'
+

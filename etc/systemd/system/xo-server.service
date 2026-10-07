@@ -1,0 +1,13 @@
+Unit]
+Description=XO Server
+After=network-online.target
+
+[Service]
+Environment="DEBUG=xo:main"
+Restart=always
+SyslogIdentifier=xo-server
+ExecStart=/usr/bin/node /opt/xo/xo-server/dist/cli.mjs
+
+[Install]
+WantedBy=multi-user.target
+

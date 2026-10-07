@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Stop and disable the service before removal
+if [ "$1" = "remove" ]; then
+    systemctl stop xo-server.service || true
+    systemctl disable xo-server.service || true
+fi
+
+exit 0
+
