@@ -18,6 +18,10 @@ jobs:
           cat target.txt
           cat target.txt >> $GITHUB_ENV
 
+      - name: Check version
+        run: |
+          grep -q ${XO_VERSION}-${DEB_REV} DEBIAN-13/control || exit 1
+
       - name: Checkout xen-orchestra
         uses: actions/checkout@v7
         with:
