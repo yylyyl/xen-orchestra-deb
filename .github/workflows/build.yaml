@@ -45,7 +45,7 @@ jobs:
           docker exec builder sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list'
           docker exec builder sh -c 'apt-get update && apt-get install -y yarn'
 
-      - name: yarn
+      - name: "Command: yarn"
         run: |
           docker exec builder sh -c 'cd /workdir/src && yarn'
 
@@ -54,11 +54,11 @@ jobs:
           cd patch
           ./patch.sh
 
-      - name: yarn build
+      - name: "Command: yarn build"
         run: |
           docker exec builder sh -c 'cd /workdir/src && yarn build'
 
-      - name: build deb
+      - name: Build deb
         run: |
           DEB="xen-orchestra-${{ env.XO_VERSION }}"
           mkdir -p $DEB/opt/xo
