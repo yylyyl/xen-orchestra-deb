@@ -1,7 +1,7 @@
 Package: xen-orchestra
 Version: 6.8.2-1
 Architecture: amd64
-Depends: nodejs (>= 24.0.0), nodejs (<< 25.0.0) gnupg, libfuse2t64, nfs-common
+Depends: nodejs (>= 24.0.0), nodejs (<< 25.0.0), gnupg, libfuse2t64, nfs-common
 Maintainer: yylyyl
 Description: xen-orchestra
 
