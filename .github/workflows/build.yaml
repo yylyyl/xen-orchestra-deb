@@ -56,7 +56,7 @@ jobs:
 
       - name: yarn build
         run: |
-          docker exec builder sh -c 'XO_VERSION="${{ env.XO_VERSION }}" XO_REF="${{ env.XO_REF }}" cd /workdir/src && yarn build'
+          docker exec builder sh -c 'cd /workdir/src && yarn build'
 
       - name: build deb
         run: |
@@ -69,5 +69,11 @@ jobs:
           ln -s /opt/xo/xen-orchestra/packages/xo-server $DEB/opt/xo/xo-server
           ln -s /opt/xo/xen-orchestra/packages/xo-web $DEB/opt/xo/xo-web
           ln -s /opt/xo/xen-orchestra/@xen-orchestra $DEB/opt/xo/xo-web-v6
-          docker exec builder sh -c 'cd /workdir/src && dpkg-deb -b xen-orchestra-${{ env.XO_VERSION }}'
+          docker exec builder sh -c 'cd /workdir && dpkg-deb -b xen-orchestra-${{ env.XO_VERSION }}'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: xen-orchestra-${{ env.XO_VERSION }}.deb
+          archive: false
 
