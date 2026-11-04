@@ -3,9 +3,11 @@ set -e
 
 # Enable and start the service after installation
 if [ "$1" = "configure" ]; then
-    systemctl daemon-reload || true
-    systemctl enable xo-server.service || true
-    systemctl start xo-server.service
+    if [ -d /run/systemd/system ]; then
+        systemctl daemon-reload || true
+        systemctl enable xo-server.service || true
+        systemctl start xo-server.service || true
+    fi
 fi
 
 exit 0
