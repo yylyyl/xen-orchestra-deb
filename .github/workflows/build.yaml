@@ -69,7 +69,7 @@ jobs:
           ln -s /opt/xo/xen-orchestra/packages/xo-server $DEB/opt/xo/xo-server
           ln -s /opt/xo/xen-orchestra/packages/xo-web $DEB/opt/xo/xo-web
           ln -s /opt/xo/xen-orchestra/@xen-orchestra $DEB/opt/xo/xo-web-v6
-          docker exec builder sh -c 'cd /workdir && dpkg-deb -b xen-orchestra-${{ env.XO_VERSION }}'
+          docker exec builder sh -c 'cd /workdir && dpkg-deb --root-owner-group -b xen-orchestra-${{ env.XO_VERSION }}'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
