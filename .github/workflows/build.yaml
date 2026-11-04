@@ -65,6 +65,7 @@ jobs:
           mv src $DEB/opt/xo/xen-orchestra
           cp -r DEBIAN-13 $DEB/DEBIAN
           cp -r etc $DEB/etc
+          mkdir $DEB/etc/xo-server
           cp $DEB/opt/xo/xen-orchestra/packages/xo-server/sample.config.toml $DEB/etc/xo-server/config.toml
           ln -s /opt/xo/xo-server/sample.config.toml $DEB/etc/xo-server/sample.config.toml
           ln -s /opt/xo/xen-orchestra/packages/xo-cli $DEB/opt/xo/xo-cli
