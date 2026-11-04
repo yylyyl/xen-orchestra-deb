@@ -62,9 +62,10 @@ jobs:
         run: |
           DEB="xen-orchestra-${{ env.XO_VERSION }}"
           mkdir -p $DEB/opt/xo
-          cp -r src $DEB/opt/xo/xen-orchestra
+          mv src $DEB/opt/xo/xen-orchestra
           cp -r DEBIAN-13 $DEB/DEBIAN
           cp -r etc $DEB/etc
+          cp $DEB/opt/xo/xo-server/sample.config.toml $DEB/etc/config.toml
           ln -s /opt/xo/xen-orchestra/packages/xo-cli $DEB/opt/xo/xo-cli
           ln -s /opt/xo/xen-orchestra/packages/xo-server $DEB/opt/xo/xo-server
           ln -s /opt/xo/xen-orchestra/packages/xo-web $DEB/opt/xo/xo-web
