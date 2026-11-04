@@ -33,19 +33,22 @@ jobs:
         run: |
           docker exec builder sh -c 'apt update && apt install -y curl build-essential libfuse-dev'
 
-      - name: Setup Node.js repo
+      - name: Setup Node.js
         run: |
           docker exec builder sh -c 'curl -fsSL https://deb.nodesource.com/setup_24.x | bash -'
-
-      - name: Install Node.js
-        run: |
           docker exec builder sh -c 'apt install -y nodejs'
 
-      - name: npm install
+      - name: Setup yarn
         run: |
-          docker exec builder sh -c 'cd /workdir/src && npm install'
+          docker exec builder sh -c 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/trusted.gpg.d/yarn.asc'
+          docker exec builder sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list'
+          docker exec builder sh -c 'apt install -y yarn'
 
-      - name: npm build
+      - name: yarn
         run: |
-          docker exec builder sh -c 'cd /workdir/src && npm build'
+          docker exec builder sh -c 'cd /workdir/src && yarn'
+
+      - name: yarn build
+        run: |
+          docker exec builder sh -c 'cd /workdir/src && yarn build'
 
