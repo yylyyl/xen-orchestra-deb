@@ -22,7 +22,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: vatesfr/xen-orchestra
-          fetch-depth: 0
           ref: ${{ env.XO_REF  }}
           path: src
 
