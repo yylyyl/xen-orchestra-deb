@@ -2,6 +2,15 @@ name: Build for release
 
 on:
   workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create a release'
+        required: false
+        type: boolean
+      upload_artifact:
+        description: 'Upload artifact'
+        required: false
+        type: boolean
 
 permissions:
   contents: write
@@ -79,8 +88,18 @@ jobs:
           docker exec builder sh -c 'cd /workdir && dpkg-deb --root-owner-group -b deb xen-orchestra_${{ env.XO_VERSION }}-${{ env.DEB_REV }}_amd64.deb'
 
       - name: Upload artifact
+        if: ${{ inputs.upload_artifact }}
         uses: actions/upload-artifact@v7
         with:
           path: xen-orchestra_${{ env.XO_VERSION }}-${{ env.DEB_REV }}_amd64.deb
           archive: false
+
+      - name: Create release
+        if: ${{ inputs.create_release }}
+        uses: softprops/action-gh-release@v3
+        with:
+          draft: true
+          prerelease: true
+          files: |
+            xen-orchestra_${{ env.XO_VERSION }}-${{ env.DEB_REV }}_amd64.deb
 
