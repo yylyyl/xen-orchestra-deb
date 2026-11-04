@@ -50,7 +50,7 @@ jobs:
           docker exec builder sh -c 'cd /workdir/src && yarn'
 
       - name: apply patches
-        run:
+        run: |
           cd patch
           ./patch.sh
 
