@@ -60,7 +60,7 @@ jobs:
 
       - name: Build deb
         run: |
-          DEB="xen-orchestra-${{ env.XO_VERSION }}-${{ env.DEB_REV }}"
+          DEB="deb"
           mkdir -p $DEB/opt/xo
           mv src $DEB/opt/xo/xen-orchestra
           cp -r DEBIAN-13 $DEB/DEBIAN
@@ -72,11 +72,11 @@ jobs:
           ln -s /opt/xo/xen-orchestra/packages/xo-server $DEB/opt/xo/xo-server
           ln -s /opt/xo/xen-orchestra/packages/xo-web $DEB/opt/xo/xo-web
           ln -s /opt/xo/xen-orchestra/@xen-orchestra $DEB/opt/xo/xo-web-v6
-          docker exec builder sh -c 'cd /workdir && dpkg-deb --root-owner-group -b xen-orchestra-${{ env.XO_VERSION }}-${{ env.DEB_REV }}'
+          docker exec builder sh -c 'cd /workdir && dpkg-deb --root-owner-group -b $DEB xen-orchestra_${{ env.XO_VERSION }}-${{ env.DEB_REV }}_amd64.deb'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          path: xen-orchestra-${{ env.XO_VERSION }}-${{ env.DEB_REV }}.deb
+          path: xen-orchestra_${{ env.XO_VERSION }}-${{ env.DEB_REV }}_amd64.deb
           archive: false
 
