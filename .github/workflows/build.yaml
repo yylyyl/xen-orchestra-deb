@@ -31,18 +31,18 @@ jobs:
 
       - name: Install tools in container
         run: |
-          docker exec builder sh -c 'apt update && apt install -y curl build-essential libfuse-dev'
+          docker exec builder sh -c 'apt-get update && apt-get install -y curl build-essential libfuse-dev'
 
       - name: Setup Node.js
         run: |
           docker exec builder sh -c 'curl -fsSL https://deb.nodesource.com/setup_24.x | bash -'
-          docker exec builder sh -c 'apt install -y nodejs'
+          docker exec builder sh -c 'apt-get install -y nodejs'
 
       - name: Setup yarn
         run: |
           docker exec builder sh -c 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/trusted.gpg.d/yarn.asc'
           docker exec builder sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list'
-          docker exec builder sh -c 'apt install -y yarn'
+          docker exec builder sh -c 'apt-get update && apt-get install -y yarn'
 
       - name: yarn
         run: |
