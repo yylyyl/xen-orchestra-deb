@@ -6,7 +6,7 @@
            <VtsTabularKeyValueList>
 -            <VtsTabularKeyValueRow :label="t('version')" />
 +            <VtsTabularKeyValueRow :label="t('version')">
-+              {{ process.env.XO_VERSION }}-{{ process.env.XO_REF.slice(0, 7) }}
++              VERSION-REF
 +            </VtsTabularKeyValueRow>
              <VtsTabularKeyValueRow :label="t('news')">
                <template #value>
