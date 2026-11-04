@@ -1,0 +1,13 @@
+--- settings.vue.orig	2026-11-03 20:17:08
++++ settings.vue	2026-11-03 20:23:30
+@@ -8,7 +8,9 @@
+         <VtsColumn :class="{ 'mobile-about': uiStore.isSmall }">
+           <div class="typo-h6">{{ t('xen-orchestra') }}</div>
+           <VtsTabularKeyValueList>
+-            <VtsTabularKeyValueRow :label="t('version')" />
++            <VtsTabularKeyValueRow :label="t('version')">
++              {{ process.env.XO_VERSION }}-{{ process.env.XO_REF.slice(0, 7) }}
++            </VtsTabularKeyValueRow>
+             <VtsTabularKeyValueRow :label="t('news')">
+               <template #value>
+                 <UiLink size="medium" :href="XO_LINKS.BLOG">
