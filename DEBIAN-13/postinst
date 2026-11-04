@@ -5,12 +5,8 @@ set -e
 if [ "$1" = "configure" ]; then
     if [ -d /run/systemd/system ]; then
         systemctl daemon-reload || true
-        if [ -n "$2" ]; then
-            action=restart
-        else
-            action=start
-        fi
-        deb-systemd-invoke $action xo-server.service || true
+        systemctl enable xo-server.service || true
+        systemctl restart xo-server.service || true
     fi
 fi
 
