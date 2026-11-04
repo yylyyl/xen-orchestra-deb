@@ -34,9 +34,13 @@ jobs:
         run: |
           docker exec builder sh -c 'apt update && apt install -y curl build-essential libfuse-dev'
 
-      - name: Setup Node.js
+      - name: Setup Node.js repo
         run: |
           docker exec builder sh -c 'curl -fsSL https://deb.nodesource.com/setup_24.x | bash -'
+
+      - name: Install Node.js
+        run: |
+          docker exec builder sh -c 'apt install -y nodejs'
 
       - name: npm
         run: |
