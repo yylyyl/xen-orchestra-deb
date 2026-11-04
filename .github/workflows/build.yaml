@@ -42,9 +42,9 @@ jobs:
         run: |
           docker exec builder sh -c 'apt install -y nodejs'
 
-      - name: npm
+      - name: npm install
         run: |
-          docker exec builder sh -c 'cd /workdir/src && npm'
+          docker exec builder sh -c 'cd /workdir/src && npm install'
 
       - name: npm build
         run: |
