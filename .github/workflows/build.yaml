@@ -32,7 +32,7 @@ jobs:
 
       - name: Install tools in container
         run: |
-          docker exec builder sh -c 'apt update && apt install curl build-essential libfuse-dev'
+          docker exec builder sh -c 'apt update && apt install -y curl build-essential libfuse-dev'
 
       - name: Setup Node.js
         run: |
