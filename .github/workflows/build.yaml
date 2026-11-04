@@ -66,6 +66,7 @@ jobs:
           cp -r DEBIAN-13 $DEB/DEBIAN
           cp -r etc $DEB/etc
           cp $DEB/opt/xo/xen-orchestra/packages/xo-server/sample.config.toml $DEB/etc/xo-server/config.toml
+          ln -s /opt/xo/xo-server/sample.config.toml $DEB/etc/xo-server/sample.config.toml
           ln -s /opt/xo/xen-orchestra/packages/xo-cli $DEB/opt/xo/xo-cli
           ln -s /opt/xo/xen-orchestra/packages/xo-server $DEB/opt/xo/xo-server
           ln -s /opt/xo/xen-orchestra/packages/xo-web $DEB/opt/xo/xo-web
