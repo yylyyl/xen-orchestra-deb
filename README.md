@@ -8,7 +8,7 @@ Thanks for the inspiration and work from [ronivay/XenOrchestraInstallerUpdater](
 
 ## Preparation
 
-Install redis server *by yourself*, locally or on an external server. For example:
+Install redis server **by yourself**, locally or on an external server. For example:
 
 ```
 apt-get install redis-server
