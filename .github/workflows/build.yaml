@@ -38,6 +38,10 @@ jobs:
           ref: ${{ env.XO_REF }}
           path: src
 
+      - name: Check version in source
+        run: |
+          grep -q ${XO_VERSION} src/CHANGELOG.md || exit 1
+
       - name: Run debian container
         run: |
           docker run -d --name builder -v ./:/workdir debian:13-slim tail -f /dev/null
@@ -100,6 +104,10 @@ jobs:
         with:
           draft: true
           prerelease: true
+          body: |
+            Upstream release: [xen-orchestra ${{ env.XO_VERSION }}](https://github.com/vatesfr/xen-orchestra/tree/${{ env.XO_REF }})
+            
+            Upstream changelog: [CHANGELOG.md](https://github.com/vatesfr/xen-orchestra/blob/${{ env.XO_REF }}/CHANGELOG.md)
           files: |
             xen-orchestra_${{ env.XO_VERSION }}-${{ env.DEB_REV }}_amd64.deb
 
